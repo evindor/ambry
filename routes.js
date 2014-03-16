@@ -30,7 +30,7 @@ module.exports = function(app, passport) {
             return res.render('404');
         }
 
-        if (req.isAuthenticated()) {
+        if (req.isAuthenticated() && req.username.id === req.user.id) {
             req.user.updateStars(function(user) {
                 res.render('profile', {
                     user : user
