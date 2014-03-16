@@ -16,7 +16,7 @@ module.exports = function(passport) {
     passport.use(new GithubStrategy({
         clientID: '65b184ffe29109d564b6',
         clientSecret: 'c5e4c4c4c9538d4c089185d35a97fc913877a5d8',
-        callbackURL: 'http://ambry.pw:3000/auth/github/callback'
+        callbackURL: 'http://ambry.herokuapp.com/auth/github/callback'
     }, function(accessToken, refreshToken, profile, done) {
         User.findOne({username: profile.username}, function(err, user) {
             if (user) {
