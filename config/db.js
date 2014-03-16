@@ -1,3 +1,3 @@
 module.exports = {
-    url: 'mongodb://localhost'
+    url: process.env.MONGOHQ_URL || 'mongodb://localhost/ambry'
 }
