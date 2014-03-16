@@ -1,9 +1,8 @@
 extends layout
 
 block content
-    h2 Your profile, #{user.username}
     if user.stars
-        h2 Your stars: 
+        h2 #{user.username} has #{user.stars.length} starred repos:
         for star in user.stars
             p #{star.name}, #{star.language}
 

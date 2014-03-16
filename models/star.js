@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var starSchema = mongoose.Schema({
     name: String,
-    _userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    language: String,
+    _ownerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 
