@@ -12,7 +12,9 @@ var passport = require('passport');
 var dbconf = require('./config/db');
 
 var app = express();
-mongoose.connect(dbconf.url);
+
+var RedisStore = require('connect-redis')(express);
+mongoose.connect(dbconf.mongoUrl);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -24,7 +26,9 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('rv3if*h3]idbu$ehd#i1j3uydv^%sn'));
-app.use(express.session());
+app.use(express.session({
+    store: new RedisStore(dbconf.redisConf)
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
