@@ -1,3 +1,10 @@
+.tags
+    form.add-tag
+        input
+    for tag in tags.models
+        p #{tag.get('name')}
+
+.stars
 if user.stars
     h2 #{user.get('username')} has #{user.stars.length} starred repos:
     for star in user.stars.models

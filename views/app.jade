@@ -3,6 +3,9 @@ extends layout
 block content
     #app
     script.
-        window.bootstrappedUser = !{JSON.stringify(user)}
+        window.bootstrapped = {
+            user: !{JSON.stringify(user)},
+            tags: !{JSON.stringify(tags)}
+        }
     script(src="/javascripts/build/app.js")
 

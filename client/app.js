@@ -4,5 +4,5 @@ var Backbone = require('backbone'),
 Backbone.$ = $;
 
 $(function() {
-    window.app = new AppView({user: window.bootstrappedUser || null})
+    window.app = new AppView(window.bootstrapped)
 });
