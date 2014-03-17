@@ -1,0 +1,5 @@
+if user.stars
+    h2 #{user.get('username')} has #{user.stars.length} starred repos:
+    for star in user.stars.models
+        p #{star.get('name')}, #{star.get('language')}
+

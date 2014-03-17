@@ -31,18 +31,27 @@ module.exports = function(app, passport) {
         }
 
         if (req.isAuthenticated() && req.username.id === req.user.id) {
-            req.user.updateStars(function(user) {
-                res.render('app', {
-                    user : user
+            if (req.user.stars.length) {
+                req.user.populate('stars', function(err, userPopulated) {
+                    if (err) throw err;
+                    res.render('app', {
+                        user : userPopulated
+                    });
                 });
-            });
+            } else {
+                req.user.updateStars(function(user) {
+                    res.render('app', {
+                        user : user
+                    });
+                });
+            }
         } else {
             req.username.populate('stars', function(err, user) {
                 if (err) throw err;
                 res.render('profile', {
                     user : user
                 });
-            })
+            });
         }
     });
 };

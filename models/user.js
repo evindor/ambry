@@ -7,7 +7,7 @@ var userSchema = mongoose.Schema({
     token: String,
     email: String,
     displayName: String,
-    username: {type: [String], index: true},
+    username: {type: String, index: true},
     stars: [{type: mongoose.Schema.Types.ObjectId, ref: 'Star', unique: true}]
 });
 
