@@ -32,7 +32,7 @@ module.exports = function(app, passport) {
 
         if (req.isAuthenticated() && req.username.id === req.user.id) {
             req.user.updateStars(function(user) {
-                res.render('profile', {
+                res.render('app', {
                     user : user
                 });
             });
