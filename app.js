@@ -41,7 +41,7 @@ if ('development' == app.get('env')) {
 
 require('./config/params.js')(app);
 require('./routes.js')(app, passport);
-require('./config/passport.js')(passport);
+require('./config/passport.js')(app, passport);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

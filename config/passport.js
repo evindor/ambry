@@ -2,7 +2,7 @@ var passport    = require('passport'),
     GithubStrategy = require('passport-github').Strategy,
     User = require('../models/user');
 
-module.exports = function(passport) {
+module.exports = function(app, passport) {
     passport.serializeUser(function (user, done) {
         done(null, user.id);
     });
@@ -13,11 +13,7 @@ module.exports = function(passport) {
         });
     });
 
-    passport.use(new GithubStrategy({
-        clientID: '65b184ffe29109d564b6',
-        clientSecret: 'c5e4c4c4c9538d4c089185d35a97fc913877a5d8',
-        callbackURL: 'http://ambry.pw:3000/auth/github/callback'
-    }, function(accessToken, refreshToken, profile, done) {
+    passport.use(new GithubStrategy(require('./github')(app), function(accessToken, refreshToken, profile, done) {
         User.findOne({username: profile.username}, function(err, user) {
             if (user) {
                 user.token = accessToken;
