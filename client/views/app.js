@@ -3,7 +3,10 @@ var Backbone = require('backbone'),
     User = require('../models/user'),
     Stars = require('../collections/stars'),
     Tags = require('../collections/tags'),
+    rivets = require('rivets'),
     template = require('../templates/app.jade');
+
+require('../vendor/rivets.adapter');
 
 module.exports = Backbone.View.extend({
     el: '#app',
@@ -23,6 +26,10 @@ module.exports = Backbone.View.extend({
             user: this.user,
             tags: this.tags
         }));
+        rivets.bind(this.$el[0], {
+            user: this.user,
+            tags: this.tags
+        });
     },
 
     addTag: function(event) {

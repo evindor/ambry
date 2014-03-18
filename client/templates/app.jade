@@ -1,8 +1,8 @@
 .tags
     form.add-tag
         input
-    for tag in tags.models
-        p #{tag.get('name')}
+    ul(rv-each-tag='tags.models')
+        li(rv-html='tag:name')
 
 .stars
 if user.stars

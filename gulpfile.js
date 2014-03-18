@@ -9,3 +9,7 @@ gulp.task('build', function() {
         }))
         .pipe(gulp.dest('./public/javascripts/build/'));
 });
+
+gulp.task('watch', function() {
+    gulp.watch(['client/**/*.js', 'client/**/*.jade'], ['build']);
+});
