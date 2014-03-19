@@ -1,8 +1,8 @@
 .tags
     form.add-tag
         input
-    ul(rv-each-tag='tags.models')
-        li(rv-html='tag:name')
+    ul
+        li(rv-each-tag='tags.models', rv-text='tag:name')
 
 .stars
 if user.stars
