@@ -1,38 +1,25 @@
-var User = require('../models/user'),
-    Tag = require('../models/tag');
+var async = require('async'),
+    User = require('../models/user'),
+    Tag = require('../models/tag'),
+    Star = require('../models/star');
 
 module.exports = {
     show: function(req, res, username) {
-        if (!req.username) {
-            return res.render('404');
-        }
+        if (!req.username) return res.render('404');
 
-        if (req.isAuthenticated() && req.username.id === req.user.id) {
-            Tag.find({_ownerId: req.user._id}, function(err, tags) {
-                if (req.user.stars.length) {
-                    req.user.populate('stars', function(err, userPopulated) {
-                        if (err) throw err;
-                        res.render('app', {
-                            user : userPopulated,
-                            tags: tags
-                        });
-                    });
-                } else {
-                    req.user.updateStars(function(user) {
-                        res.render('app', {
-                            user : user,
-                            tags: tags
-                        });
-                    });
-                }
+        // TODO: fetch stars for newcomers
+        var view = req.isAuthenticated() ? 'app' : 'profile';
+        async.parallel({
+            tags: function(cb) { Tag.find({_ownerId: req.username._id}, cb) },
+            stars: function(cb) { Star.find({_ownerId: req.username._id}, cb) }
+        },
+        function(err, models) {
+            if (err) throw err;
+            res.render(view, {
+                user : req.username,
+                tags: models.tags,
+                stars: models.stars
             });
-        } else {
-            req.username.populate('stars', function(err, user) {
-                if (err) throw err;
-                res.render('profile', {
-                    user : user
-                });
-            });
-        }
+        });
     }
 }

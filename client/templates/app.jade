@@ -2,11 +2,11 @@
     form.add-tag
         input
     ul
-        li(rv-each-tag='tags.models', rv-text='tag:name')
+        li.tag-item(rv-each-tag='tags.models', rv-text='tag:name', rv-data-id="tag:_id")
 
 .stars
-if user.stars
-    h2 #{user.get('username')} has #{user.stars.length} starred repos:
-    for star in user.stars.models
-        p #{star.get('name')}, #{star.get('language')}
+if stars
+    h2 #{user.get('username')} has #{stars.length} starred repos:
+    for star in stars.models
+        p.star-item(draggable='true', data-id=star.get('_id')) #{star.get('name')}, #{star.get('language')}
 

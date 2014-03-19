@@ -22,6 +22,7 @@
     "gulp-browserify": "~0.5.0",
     "browserify": "~3.32.1",
     "jadeify": "~2.1.1",
-    "rivets": "~0.6.6"
+    "rivets": "~0.6.6",
+    "async": "~0.2.10"
   }
 }
