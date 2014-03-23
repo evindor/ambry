@@ -45,6 +45,8 @@ require('./config/params.js')(app);
 require('./routes.js')(app, passport);
 require('./config/passport.js')(app, passport);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+console.log('Express server listening on port ' + app.get('port'));
+
+var server = app.listen(app.get('port'));
+var io = require('socket.io').listen(server);
+require('./config/socketio.js')(io);

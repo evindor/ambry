@@ -59,10 +59,7 @@ userSchema.methods.updateStars = function(cb) {
                 if (count == stars.length) {
                     user.save(function(err, user) { 
                         if (err) throw err;
-                        user.populate('stars', function(err, user) {
-                            if (err) throw err;
-                            cb(user);
-                        });
+                        cb(null, user, stars);
                     });
                 }
             };

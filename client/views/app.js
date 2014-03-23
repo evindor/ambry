@@ -1,5 +1,6 @@
 var Backbone = require('backbone'),
     $ = require('jquery'),
+    io = require('socket.io-client'),
     User = require('../models/user'),
     Stars = require('../collections/stars'),
     Tags = require('../collections/tags'),
@@ -37,6 +38,7 @@ module.exports = Backbone.View.extend({
             stars: this.stars,
             tags: this.tags
         });
+        this.subscribeSockets();
     },
 
     addTag: function(event) {
@@ -63,5 +65,16 @@ module.exports = Backbone.View.extend({
         var tags = this.user.stars.findWhere({_id: starId}).get('tags');
         tags.push(starId);
         this.user.stars.save()
+    },
+
+    subscribeSockets: function() {
+        var socket = io.connect(window.location.origin),
+            view = this;
+        socket.on('user', function (data) {
+            view.user.reset(data);
+        });
+        socket.on('stars', function (data) {
+            view.stars.reset(data);
+        });
     }
 });

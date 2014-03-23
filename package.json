@@ -23,6 +23,8 @@
     "browserify": "~3.32.1",
     "jadeify": "~2.1.1",
     "rivets": "~0.6.6",
-    "async": "~0.2.10"
+    "async": "~0.2.10",
+    "socket.io": "~0.9.16",
+    "socket.io-client": "~1.0.0-pre"
   }
 }
