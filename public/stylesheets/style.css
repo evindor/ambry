@@ -6,3 +6,21 @@ body {
 a {
   color: #00B7FF;
 }
+
+.octocat {
+    background: url("../images/orderedlistocat.png") top center no-repeat;
+    width: 300px;
+    height: 350px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+}
+
+.octocat > div {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    font-size: 32px;
+}
