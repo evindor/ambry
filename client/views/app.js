@@ -16,6 +16,7 @@ module.exports = Backbone.View.extend({
         this.stars = new Stars(options.stars);
         this.tags = new Tags(options.tags);
         this.render();
+        this.stars.update();
     },
 
     events: {

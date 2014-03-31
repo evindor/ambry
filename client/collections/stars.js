@@ -3,5 +3,8 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.Collection.extend({
     model: Star,
-    url: '/stars'
+    url: '/stars/update',
+    update: function() {
+        this.fetch({reset: true});
+    }
 });

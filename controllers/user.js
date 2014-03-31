@@ -21,5 +21,12 @@ module.exports = {
                 stars: models.stars
             });
         });
+    },
+
+    updateStars: function(req, res) {
+        if (!req.isAuthenticated()) return res.render('403');
+        req.user.updateStars(function(stars) {
+            res.json(200, stars);
+        });
     }
 }

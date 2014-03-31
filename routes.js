@@ -21,6 +21,9 @@ module.exports = function(app, passport) {
 
     // User
     app.get('/:username', user.show);
+    
+    // Stars
+    app.get('/stars/update', user.updateStars);
 };
 
 // route middleware to make sure a user is logged in
