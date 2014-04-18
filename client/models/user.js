@@ -1,6 +1,6 @@
-var Backbone = require('backbone'),
-    Stars = require('../collections/stars');
+var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
+    idAttribute: '_id'
 });
 

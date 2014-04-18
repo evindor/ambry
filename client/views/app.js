@@ -21,6 +21,7 @@ module.exports = Backbone.View.extend({
 
     events: {
         'submit .add-tag': 'addTag',
+        'keyup .search-tags': 'searchTags',
         'dragover .tag-item': 'cancelEvent',
         'dragenter .tag-item': 'cancelEvent',
         'dragstart .star-item': 'handleStarDrag',
@@ -53,16 +54,23 @@ module.exports = Backbone.View.extend({
     
     handleStarDrag: function(event) {
         var id = $(event.target).attr('data-id');
-        event.dataTransfer.setData('id', id);
+        event.originalEvent.dataTransfer.setData('id', id);
     },
 
     handleStarDrop: function(event) {
         event.preventDefault();
-        var starId = event.dataTransfer.getData('id'),
-            tagId = $(event.target).attr('data-id');
+        var starId = event.originalEvent.dataTransfer.getData('id'),
+            tagId = $(event.target).closest('.tag-item').attr('data-id');
 
-        var tags = this.user.stars.findWhere({_id: starId}).get('tags');
-        tags.push(starId);
-        this.user.stars.save()
+        var star = this.stars.findWhere({_id: starId});
+        var tag = this.tags.findWhere({_id: tagId});
+        tag.get('stars').push(starId);
+        star.get('tags').push(tagId);
+        star.save();
+        tag.save();
+    },
+
+    searchTags: function(event) {
+        var query = $(event);
     }
 });

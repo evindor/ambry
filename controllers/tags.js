@@ -22,5 +22,19 @@ module.exports = {
         } else {
             res.send(401); 
         }
+    },
+
+    update: function(req, res, id) {
+        if (req.isAuthenticated()) {
+            Tag.findOne({_id: req.params.id}, function(err, tag) {
+                if (!tag) return res.send(401);
+                tag.update({$pushAll: {stars: req.body.stars}}, function(err, tag) {
+                    res.json(tag);
+                });
+            }); 
+        } else {
+            res.send(401); 
+        }
     }
+
 }
