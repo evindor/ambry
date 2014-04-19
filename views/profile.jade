@@ -1,8 +1,0 @@
-extends layout
-
-block content
-    if user.stars
-        h2 #{user.username} has #{user.stars.length} starred repos:
-        for star in stars
-            p #{star.name}, #{star.language}
-
