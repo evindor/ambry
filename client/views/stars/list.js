@@ -5,5 +5,7 @@ var starsData = [
 ];
 
 Template.starsList.helpers({
-    stars: starsData
+    stars: function() {
+        return Stars.find();
+    }
 });
