@@ -1,6 +1,6 @@
 .tags
     ul
-        li.tag-item(rv-each-tag='tags.models', rv-data-id="tag:_id")
+        li.tag-item(rv-each-tag='tags:models', rv-data-id="tag:_id")
             span(rv-text='tag:name')
             ul
                 li(rv-each-star='tag:stars', rv-text='star')
@@ -8,8 +8,9 @@
         input
 
 .stars
-    if stars
-        h2 #{user.get('username')} has #{stars.length} starred repos:
-        for star in stars.models
-            p.star-item(draggable='true', data-id=star.get('_id')) #{star.get('name')}, #{star.get('language')}
+    h2 #{user.get('username')} has #{stars.length} starred repos:
+    p.star-item(draggable='true', rv-each-star='stars.models | filter tags no', rv-data-id='star:_id')
+        span(rv-text='star:name')
+        | , 
+        span(rv-text='star:language')
 

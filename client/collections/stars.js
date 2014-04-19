@@ -6,5 +6,8 @@ module.exports = Backbone.Collection.extend({
     url: '/stars/update',
     update: function() {
         this.fetch({reset: true});
+    },
+    comparator: function(star) {
+        return star.get('name').toLowerCase();
     }
 });

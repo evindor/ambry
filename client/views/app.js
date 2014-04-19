@@ -7,6 +7,7 @@ var Backbone = require('backbone'),
     template = require('../templates/app.jade');
 
 require('../vendor/rivets.adapter');
+require('../vendor/rivets.formatters');
 
 module.exports = Backbone.View.extend({
     el: '#app',
@@ -53,7 +54,7 @@ module.exports = Backbone.View.extend({
     },
     
     handleStarDrag: function(event) {
-        var id = $(event.target).attr('data-id');
+        var id = $(event.target).closest('.star-item').attr('data-id');
         event.originalEvent.dataTransfer.setData('id', id);
     },
 
@@ -62,6 +63,7 @@ module.exports = Backbone.View.extend({
         var starId = event.originalEvent.dataTransfer.getData('id'),
             tagId = $(event.target).closest('.tag-item').attr('data-id');
 
+        console.log(starId, tagId);
         var star = this.stars.findWhere({_id: starId});
         var tag = this.tags.findWhere({_id: tagId});
         tag.get('stars').push(starId);
