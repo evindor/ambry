@@ -63,7 +63,6 @@ module.exports = Backbone.View.extend({
         var starId = event.originalEvent.dataTransfer.getData('id'),
             tagId = $(event.target).closest('.tag-item').attr('data-id');
 
-        console.log(starId, tagId);
         var star = this.stars.findWhere({_id: starId});
         var tag = this.tags.findWhere({_id: tagId});
         tag.get('stars').push(starId);
